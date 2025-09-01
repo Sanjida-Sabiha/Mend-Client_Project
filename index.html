@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="assets/img/fav-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mend</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+    <link rel="stylesheet" href="assets/css/aos.css">
+</head>
+<body class="bg-mainBg">
+
+    <!--- Header Area Start Here -->
+    <header class="bg-cover bg-center w-full bg-no-repeat" style="background-image: url('assets/img/banner.png');">
+        <div class="container">
+            <nav x-data="{ open: false }" class="">
+                <div class="flex justify-between py-8 items-center">
+                    <div class="">
+                        <a class="" href="index.html">
+                            <img class="md:w-full w-28" src="assets/img/logo.svg" alt="logo">
+                        </a>
+                    </div>
+                    <!-- Menu button for mobile -->
+                    <div class="-mr-2 flex items-center lg:hidden">
+                        <button @click="open = !open" class="bg-primaryColor rounded-full w-10 h-10 px-2">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="black">
+                            <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" fill="black"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Desktop menu -->
+                    <div class="hidden lg:block" x-data="{ open: false }">
+                        <ul class="flex list-none">
+                            <li class="group flex items-center relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                                <a href="#" class="inline-flex items-center no-underline text-lg leading-8 font-airbnb font-medium text-primaryColor text-opacity-80 hover:text-btnBg transition ease-in-out duration-500 "
+                                    @click.prevent="open = !open" :class="{ 'text-LavenderIndigo': open }">
+                                    Products
+                                    <svg :class="{ 'rotate-180': open }" class="ml-2 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="11" height="6" fill="none" viewBox="0 0 11 6">
+                                        <path d="M1.5 1L5.5 5L9.5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+
+                                <!-- Dropdown content  -->
+                                <ul id="dropdown" class="absolute left-1 top-10 w-52 py-2 list-none bg-white rounded-md hidden shadow-2xl z-10 group-hover:block" :class="{ 'block': open, 'hidden': !open }">
+                                    <!-- Dropdown items -->
+                                    <li>
+                                        <a href="blog.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">Blog Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog-details.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">Blog Post Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="faq.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="career.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">Career</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">Contact</a>
+                                    </li>
+                                    <li>
+                                        <a href="forget-password.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">Forget Password</a>
+                                    </li>
+                                    <li>
+                                        <a href="404.html" class="text-lg font-medium font-airbnb block px-5 py-3 text-mainBg">404 Page</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html" class=" text-lg leading-8 font-airbnb font-medium text-primaryColor text-opacity-80 hover:text-btnBg hover:transition hover:ease-in-out hover:duration-500 pl-10">Benefit</a></li>
+                            <li><a href="#" onclick="event.preventDefault()" class=" text-lg leading-8 font-airbnb font-medium text-primaryColor text-opacity-80 hover:text-btnBg hover:transition hover:ease-in-out hover:duration-500 pl-10">How it Works</a></li>
+                            <li><a href="pricing.html" class=" text-lg leading-8 font-airbnb font-medium text-primaryColor text-opacity-80 hover:text-btnBg hover:transition hover:ease-in-out hover:duration-500 pl-10">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="hidden lg:block">
+                        <a href="#" class="no-underline font-airbnb text-lg font-medium text-primaryColor hover:text-btnBg hover:transition hover:ease-in-out hover:duration-500">Log In</a>
+                        <a href="#" class="inline-block no-underline text-lg leading-7 font-light font-airbnb text-primaryColor px-6 py-3.5 bg-btnBg rounded-30 ml-5  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get Demo</a>
+                    </div>
+                </div>
+                
+                <div x-show="open" 
+                x-transition:enter="transition ease-out duration-500"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-500"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-0"
+                class="lg:hidden  rounded mx-4 mt-5 transition-opacity transition-height duration-500 ease-in-out overflow-hidden absolute inset-x-0 top-16 z-20 bg-white">
+                    <div class="px-6 py-6 space-y-1 flex justify-between flex-col">
+                        <div>
+                            <ul class="dropdown flex flex-wrap flex-col md:justify-center justify-start">
+                                <li onclick="toggleDropdown()" class="relative group pb-5 lg:px-0 md:px-5" id="dropdownBtn">
+                                    <div class="flex justify-between items-center">
+                                        <a href="#" class="inline-flex pr-2 text-lg font-PlusJakarta font-medium text-mainBg hover:text-btnBg hover:transition hover:ease-in-out hover:duration-500">Products</a>
+                                        <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6" fill="none">
+                                            <path d="M1.5 1L5.5 5L9.5 1" stroke="#010111" class="group-hover:stroke-PalatinateBlue" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <!-- Dropdown content -->
+                                    <ul id="dropdownMenu" class="w-full mt-5 bg-primaryColor rounded-md shadow-2xl hidden py-4 group-hover:block overflow-hidden">
+                                        <!-- Dropdown items -->
+                                        <li><a href="blog.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">Blog Page</a></li>
+                                        <li><a href="blog-details.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">Blog Post Page</a></li>
+                                        <li><a href="faq.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">FAQ</a></li>
+                                        <li><a href="career.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">Career</a></li>
+                                        <li><a href="contact.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">Contact Us</a></li>
+                                        <li><a href="forget-password.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">Forget Password</a></li>
+                                        <li><a href="404.html" class="text-lg font-medium font-PlusJakarta block px-5 py-3 text-btnBg">404 Page</a></li>
+                                    </ul>
+                                </li>
+                                <li class="pb-5 lg:px-0 md:px-5"><a href="#" onclick="event.preventDefault()" class="text-lg font-PlusJakarta font-medium text-mainBg hover:text-btnBg  hover:transition hover:ease-in-out hover:duration-500">Benefit</a></li>
+                                <li class="pb-5 lg:px-0 md:px-5"><a href="#" onclick="event.preventDefault()" class="text-lg font-PlusJakarta font-medium text-mainBg hover:text-btnBg  hover:transition hover:ease-in-out hover:duration-500">How it Works</a></li>
+                                <li class="pb-5 lg:px-0 md:px-5"><a href="#" onclick="event.preventDefault()" class="text-lg font-PlusJakarta font-medium text-mainBg hover:text-btnBg  hover:transition hover:ease-in-out hover:duration-500">Pricing</a></li>
+                            </ul>
+                        </div>
+                        <div class="pt-10 md:block hidden mx-0 md:mx-auto">
+                            <a href="sign-in.html" class="text-lg font-medium font-PlusJakarta text-mainBg hover:underline hover:transition hover:ease-in-out hover:duration-300">Sign In</a>
+                            <a href="sign-up.html" class="text-lg font-semibold inline-block font-PlusJakarta text-primaryColor px-8 py-3 bg-btnBg border border-primaryColor rounded-30 ml-5  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+        </div>
+        <hr class="w-full border border-primaryColor border-opacity-10"/>
+        <div class="container xl:px-0">
+            <div class="lg:w-[735px] w-full mx-auto md:mt-20 mt-8 text-center">
+                <h1 class="font-PlusJakarta font-bold text-primaryColor md:text-72xl text-40xl leading-50 md:leading-90">Adding Value Through Video Calls.</h1>
+                <p class="lg:max-w-699 w-full font-light font-airbnb md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-5">No registration needed. To start chatting
+                    <br/>with friends just send them link and enjoy video call in browser.</p>
+                <div class="flex md:flex-row flex-col gap-4 md:mt-11 mt-8 justify-center">
+                    <a href="#" class="text-center text-lg font-light inline-block font-airbnb text-primaryColor px-6 py-3.5 bg-btnBg rounded-30  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get a Free Demo</a>
+                    <a href="#" class=" md:inline-block block text-center text-lg font-light font-airbnb text-primaryColor px-6 py-3.5 bg-secondaryColor rounded-30 hover:bg-btnBg   transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">See Pricing</a>
+                </div>    
+            </div>
+            <div
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="xl:w-1192 w-full mx-auto lg:mt-20 mt-9">
+                <img src="assets/img/Dashboard.png" alt="">
+            </div>
+        </div>
+    </header>
+    <!--- Header Area End Here -->
+
+    <!-- Use Area Start Here -->
+    <section class="lg:py-32 md:py-16 py-8 bg-cover bg-center bg-no-repeat w-full" style="background-image: url('assets/img/user-bg.png');">
+        <div class="container">
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="lg:w-712 w-full mx-auto text-center">
+                <span class="block text-btnBg font-PlusJakarta font-semibold text-xl leading-8">WHY USE  MEND.IN</span>
+                <h2 class="pt-3 font-PlusJakarta font-bold md:text-40xl text-26xl leading-38 md:leading-50 text-primaryColor">Easy, Simple, Affordable</h2>
+                <p class="font-PlusJakarta font-normal md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-6 tracking-[-.2px]">Our platform helps your business in managing expenses. These are some of the reasons why you should use our platform in managing video conferecing.</p>
+            </div>
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="flex xl:flex-row flex-col-reverse justify-between xl:items-center lg:mt-16 mt-8">
+                <div class="xl:w-[497px] w-full">
+                    <div class="flex md:gap-8 gap-4 items-start">
+                        <img src="assets/img/use-2.png" alt="">
+                        <div class="xl:w-[415px] w-full">
+                            <h4 class="text-primaryColor font-PlusJakarta font-semibold md:text-24xl text-lg leading-8 md:leading-34">Lorem ipsum dolor sit amet</h4>
+                            <p class="text-primaryColor font-airbnb font-light text-opacity-80 text-base leading-7 pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol</p>
+                        </div>
+                    </div>
+                    <div class="flex md:gap-8 gap-4 items-start md:mt-11 mt-8">
+                        <img src="assets/img/use-1.png" alt="">
+                        <div class="xl:w-[415px] w-full">
+                            <h4 class="text-primaryColor font-PlusJakarta font-semibold md:text-24xl text-lg leading-8 md:leading-34">Lorem ipsum dolor sit amet</h4>
+                            <p class="text-primaryColor font-airbnb font-light text-opacity-80 text-base leading-7 pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol</p>
+                        </div>
+                    </div>
+                    <div class="flex md:gap-8 gap-4 items-start md:mt-11 mt-8">
+                        <img src="assets/img/use-3.png" alt="">
+                        <div class="xl:w-[415px] w-full">
+                            <h4 class="text-primaryColor font-PlusJakarta font-semibold md:text-24xl text-lg leading-8 md:leading-34">Lorem ipsum dolor sit amet</h4>
+                            <p class="text-primaryColor font-airbnb font-light text-opacity-80 text-base leading-7 pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+                data-aos-offset="20"
+                data-aos-once="true"
+                class="xl:w-[608px] w-full xl:mb-0 mb-8">
+                    <img class="w-full" src="assets/img/use-banner.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Use Area End Here -->
+
+    <!-- Features Area Strat Here -->
+    <section class="lg:my-32 md:my-16 my-8">
+        <div class="container">
+            <div class="flex lg:flex-row flex-col justify-between items-center xl:gap-20 gap-10">
+                <div
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+                data-aos-offset="20"
+                data-aos-once="true"
+                class="lg:w-[608px] w-full">
+                    <img class="w-full" src="assets/img/features.png" alt="">
+                </div>
+                <div
+                data-aos="fade-down"
+                data-aos-duration="1000"
+                data-aos-offset="20"
+                data-aos-once="true"
+                class="lg:w-[526px] w-full">
+                    <span class="block text-btnBg font-PlusJakarta font-semibold text-xl leading-8">Features</span>
+                    <h2 class="pt-3 font-PlusJakarta font-bold md:text-40xl text-26xl leading-38 md:leading-50 text-primaryColor">Few Easy Steps and Done</h2>
+                    <p class=" font-airbnb font-light md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-6 tracking-[-.2px]">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="mt-8 bg-secondaryColor lg:p-8 p-4 rounded-12">
+                        <div class="flex gap-4 items-center">
+                            <span class="lg:w-12 w-10 h-10 lg:h-12 rounded-full bg-btnBg text-primaryColor flex justify-center items-center font-PlusJakarta font-semibold lg:text-24xl text-base leading-7 lg:leading-34">1</span>
+                            <p class="text-primaryColor font-airbnb font-light text-xl leading-8">Lorem ipsum dolor sit amet</p>
+                        </div>
+                        <div class="flex gap-4 items-center mt-8">
+                            <span class="lg:w-12 w-10 h-10 lg:h-12 rounded-full bg-btnBg text-primaryColor flex justify-center items-center font-PlusJakarta font-semibold lg:text-24xl text-base leading-7 lg:leading-34">2</span>
+                            <p class="text-primaryColor font-airbnb font-light text-xl leading-8">Lorem ipsum dolor sit amet</p>
+                        </div>
+                        <div class="flex gap-4 items-center mt-8">
+                            <span class="lg:w-12 w-10 h-10 lg:h-12 rounded-full bg-btnBg text-primaryColor flex justify-center items-center font-PlusJakarta font-semibold lg:text-24xl text-base leading-7 lg:leading-34">3</span>
+                            <p class="text-primaryColor font-airbnb font-light text-xl leading-8">Lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Area End Here -->
+
+
+    <!-- Testimonial Area Start Here -->
+    <section class="lg:py-32 md:py-16 py-8 bg-center bg-cover bg-no-repeat w-full" style="background-image: url('assets/img/testi-bg.png');"> 
+        <div class="container">
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="lg:w-712 w-full mx-auto text-center">
+                <span class="block text-btnBg font-PlusJakarta font-semibold text-xl leading-8">WHAT THEY SAY</span>
+                <h2 class="pt-3 font-PlusJakarta font-bold md:text-40xl text-26xl leading-38 md:leading-50 text-primaryColor">Our User Kind Words</h2>
+                <p class="lg:max-w-568 w-auto mx-auto font-airbnb font-light md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-6 tracking-[-.2px]">Here are some testimonials from our user after using Spend.In to manage their business  expenses.</p>
+            </div>
+
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">It’s just incredible!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">It’s just 1 month since I’m using Spend.In to manage my business expenses, but the result is very satisfying! My business finance now more neat than before!</p>
+                            <hr class="w-full border border-[#90A3BF] border-opacity-10 mt-12 mb-8"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-1.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Jimmy Bartney
+                                    <span class="block font-normal text-sm leading-6">Product Manager at myo Lab</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">Satisfied User Here!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">Never thought that with Spend.In managing my business expenses is so easy! Been using this platform for 3 months and still counting!</p>
+                            <hr class="w-full border border-[#90A3BF] border-opacity-10 mt-12 mb-8"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-2.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Natasha Romanoff
+                                    <span class="block font-normal text-sm leading-6">Black Widow</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">No doubt, Spend.In is the best!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">“The best”! That’s what I want to say to this platform, didn’t know that there’s a platform to help you manage your business expenses like this! </p>
+                            <hr class="w-full mt-12 mb-8 bg-[#90A3BF]"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-3.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Moritika Kazuki
+                                    <span class="block font-normal text-sm leading-6">Finance Manager at Mangan</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">It’s just incredible!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">It’s just 1 month since I’m using Spend.In to manage my business expenses, but the result is very satisfying! My business finance now more neat than before!</p>
+                            <hr class="w-full border border-[#90A3BF] border-opacity-10 mt-12 mb-8"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-1.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Jimmy Bartney
+                                    <span class="block font-normal text-sm leading-6">Product Manager at myo Lab</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">Satisfied User Here!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">Never thought that with Spend.In managing my business expenses is so easy! Been using this platform for 3 months and still counting!</p>
+                            <hr class="w-full border border-[#90A3BF] border-opacity-10 mt-12 mb-8"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-2.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Natasha Romanoff
+                                    <span class="block font-normal text-sm leading-6">Black Widow</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="mt-16 bg-secondaryColor rounded-12 p-8 ">
+                            <h4 class="font-PlusJakarta font-semibold text-lg leading-8 text-primaryColor">No doubt, Spend.In is the best!</h4>
+                            <p class=" font-airbnb font-light text-base leading-7 pt-4 text-primaryColor text-opacity-70">“The best”! That’s what I want to say to this platform, didn’t know that there’s a platform to help you manage your business expenses like this! </p>
+                            <hr class="w-full border border-[#90A3BF] border-opacity-10 mt-12 mb-8"/>
+                            <div class="flex items-center gap-3">
+                                <img src="assets/img/testi-3.png" alt="">
+                                <h4 class="text-lg leading-8 font-PlusJakarta font-bold text-primaryColor">Moritika Kazuki
+                                    <span class="block font-normal text-sm leading-6">Finance Manager at Mangan</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Navigation -->
+                <div class="md:mt-20 mt-10 flex gap-4 justify-center">
+                    <button class="group p-3.5 bg-white bg-opacity-5 border border-white border-opacity-15 rounded-full hover:bg-btnBg hover:shadow-shadowSlide  hover:transition-all hover:duration-200"
+                          aria-label="Previous slide"
+                          id="slider-previous">
+                      <svg class="rotate-[180deg]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M8.93814 17C8.93814 14.8782 9.78751 12.8434 11.2994 11.3431C12.8113 9.84283 14.8619 9 17 9M17 9C15.9413 9 14.893 8.79305 13.9149 8.39108C12.9368 7.98897 12.048 7.39966 11.2994 6.65686C10.5508 5.91391 9.95697 5.03202 9.55183 4.06143C9.14666 3.09084 8.93814 2.05055 8.93814 1M17 9H1" stroke="white" class="group-hover:stroke-PalatinateBlue group-hover:transition-all group-hover:duration-200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+            
+                    <button class="group p-3.5 bg-btnBg border border-white border-opacity-15 rounded-full shadow-shadowSlide hover:shadow-none hover:bg-white hover:bg-opacity-5 hover:border-white hover:border-opacity-15 hover:transition-all hover:duration-200"
+                      aria-label="Next slide"
+                      id="slider-next">
+                      <svg  xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M8.93814 17C8.93814 14.8782 9.78751 12.8434 11.2994 11.3431C12.8113 9.84283 14.8619 9 17 9M17 9C15.9413 9 14.893 8.79305 13.9149 8.39108C12.9368 7.98897 12.048 7.39966 11.2994 6.65686C10.5508 5.91391 9.95697 5.03202 9.55183 4.06143C9.14666 3.09084 8.93814 2.05055 8.93814 1M17 9H1" stroke="white" class="group-hover:stroke-PalatinateBlue group-hover:transition-all group-hover:duration-200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Area End Here -->
+
+    <!-- Pricing Area Strat Here -->
+    <section class="bg-cover bg-center bg-no-repeat w-full lg:py-32 py-16" style="background-image: url('assets/img/pricing.png');">
+        <div class="container">
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="text-center">
+                <h2 class="font-PlusJakarta font-bold md:text-40xl text-26xl leading-38 md:leading-50 text-primaryColor">Ready to Get Started?</h2>
+                <p class=" font-airbnb font-light md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-6 tracking-[-.2px]">Choose a plan that suits your business needs</p>
+            </div>
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="w-[250px] mx-auto mt-16">
+                <div class="flex gap-4 items-center">
+                    <h4 class="font-PlusJakarta font-semibold text-xl leading-8 text-primaryColor">Monthly</h4>
+                    <label class="relative flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked  onclick="togglePricing()">
+                        <div class="w-[70px] h-9 bg-btnBg hover:bg-btnBg peer-focus:outline-0 rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-transparent after:content-[''] after:absolute after:top-[3.5px] after:left-[8px] after:bg-white after:border-btnBg after:border after:rounded-full after:h-7 after:w-7 after:transition-all dark:border-gray-600 peer-checked:bg-btnBg hover:peer-checked:bg-btnBg "></div>
+                    </label>
+                    <h4 class="font-PlusJakarta font-semibold text-xl leading-8 text-primaryColor">Yearly</h4>
+                </div>
+                <div class="flex justify-end items-end">
+                    <span class="px-3 py-2 font-PlusJakarta font-medium text-sm leading-6 text-btnBg bg-primaryColor rounded-30">Save 65%</span>
+                    <svg width="75" height="72" viewBox="0 0 75 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_152_1475)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M47.9735 23.9626C48.0499 24.4132 48.118 24.801 48.1551 25.0058C48.3837 26.2512 48.5761 29.4135 49.4578 31.5642C50.1298 33.2052 51.204 34.264 52.8376 33.8827C54.3224 33.536 55.2467 32.0557 55.6915 30.0092C56.6488 25.6048 55.4944 18.5684 54.5967 16.5328C54.4986 16.3106 54.2399 16.2099 54.0177 16.308C53.7965 16.4056 53.6958 16.6643 53.7939 16.8865C54.6549 18.8402 55.7529 25.5947 54.8339 29.8231C54.4745 31.4757 53.8371 32.748 52.6376 33.0278C51.4539 33.3044 50.7573 32.4213 50.2701 31.2317C49.4116 29.1388 49.2406 26.06 49.0187 24.8472C48.8792 24.087 48.429 21.1726 48.3303 20.9321C48.2068 20.6309 47.9513 20.6391 47.8677 20.6481C47.8029 20.655 47.4819 20.7102 47.4673 21.109C47.2563 26.7949 42.997 35.3741 36.732 41.117C30.5222 46.8096 22.3119 49.713 14.0866 44.0661C13.8865 43.9293 13.613 43.9802 13.4757 44.1793C13.339 44.3793 13.3899 44.6528 13.5899 44.7896C22.2084 50.7062 30.8193 47.7282 37.3249 41.7647C42.808 36.7388 46.7736 29.59 47.9735 23.9626Z" fill="#7C5CFC"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.3055 44.6629C15.337 44.5779 16.3667 44.5262 17.3922 44.361C20.1244 43.9215 22.8703 42.8862 25.0863 41.2122C25.2799 41.0652 25.3176 40.7901 25.1721 40.5969C25.0252 40.4033 24.75 40.3656 24.5569 40.5111C22.4548 42.1011 19.8452 43.0771 17.253 43.4939C16.0791 43.6823 14.8982 43.7203 13.7168 43.833C13.6579 43.8393 13.1431 43.8726 13.0364 43.9095C12.7873 43.994 12.7382 44.188 12.7269 44.2806C12.7166 44.358 12.7227 44.453 12.7729 44.5592C12.8146 44.646 12.9325 44.7923 13.1318 44.9543C13.7683 45.4754 15.4275 46.4776 15.6824 46.6709C18.6049 48.8866 20.9519 51.4386 23.49 54.0636C23.6591 54.2372 23.9375 54.2422 24.1116 54.0741C24.2858 53.906 24.2898 53.6281 24.1216 53.454C21.5516 50.7955 19.1713 48.2146 16.2129 45.9724C16.0381 45.8389 15.0295 45.1531 14.3055 44.6629Z" fill="#0D121F"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_152_1475">
+                        <rect width="57.0685" height="50.03" fill="white" transform="translate(74.1777 45.3687) rotate(153.036)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 md:mt-10 mt-8">
+                <div class="bg-secondaryColor p-8 rounded-12">
+                    <div class="flex items-center gap-3">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25.0669 13.2134C23.5602 13.2134 22.2136 13.9467 21.3736 15.0667C20.5336 13.9467 19.1869 13.2134 17.6802 13.2134C15.1336 13.2134 13.0669 15.2934 13.0669 17.8534C13.0669 18.84 13.2269 19.76 13.4936 20.6C14.8002 24.7467 18.8536 27.24 20.8536 27.92C21.1336 28.0134 21.6002 28.0134 21.8802 27.92C23.8802 27.24 27.9336 24.76 29.2402 20.6C29.5202 19.7467 29.6669 18.84 29.6669 17.8534C29.6802 15.2934 27.6136 13.2134 25.0669 13.2134Z" fill="#7C5CFC"/>
+                            <path d="M27.6665 11.12C27.6665 11.4266 27.3598 11.6266 27.0665 11.5466C25.2665 11.08 23.2932 11.4666 21.7998 12.5333C21.5065 12.7466 21.1065 12.7466 20.8265 12.5333C19.7732 11.76 18.4932 11.3333 17.1465 11.3333C13.7065 11.3333 10.9065 14.1466 10.9065 17.6133C10.9065 21.3733 12.7065 24.1866 14.5198 26.0666C14.6132 26.16 14.5332 26.32 14.4132 26.2666C10.7732 25.0266 2.6665 19.88 2.6665 11.12C2.6665 7.2533 5.77317 4.1333 9.61317 4.1333C11.8932 4.1333 13.9065 5.22663 15.1732 6.91997C16.4532 5.22663 18.4665 4.1333 20.7332 4.1333C24.5598 4.1333 27.6665 7.2533 27.6665 11.12Z" fill="#7C5CFC"/>
+                        </svg>
+                        <h4 class="font-PlusJakarta font-semibold text-[32px] leading-42 text-primaryColor">Free</h4>
+
+                    </div>
+                    <p class="pt-3.5 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">Perfect plan to get started</p>
+                    <h4 id="price1" class="pt-6 font-PlusJakarta font-semibold text-40xl leading-50 text-primaryColor">$0 <span class="font-medium text-lg leading-8">/month</span></h4>
+                    <p class="pt-6 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">A free plan grants you access to some cool features of Spend.In.</p>
+                    <div class="mt-8">
+                        <ul>
+                            <li class="flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Sync accross device
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                1 workspace
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-20 text-[#C3D4E9] ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Video Chat with  5 user
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="mt-8 block text-center text-lg  font-airbnb font-light text-primaryColor px-6 py-3.5 bg-btnBg rounded-30  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get Your Free Plan</a>
+                     
+                </div>
+
+                <div class="bg-secondaryColor p-8 rounded-12">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M29.3331 7.61333V20.3867C29.3331 24.0667 26.3464 27.0533 22.6664 27.0533H9.3331C8.71977 27.0533 8.1331 26.9733 7.55977 26.8133C6.7331 26.5867 6.46643 25.5333 7.07977 24.92L21.2531 10.7467C21.5464 10.4533 21.9864 10.3867 22.3998 10.4667C22.8264 10.5467 23.2931 10.4267 23.6264 10.1067L27.0531 6.66666C28.3064 5.41333 29.3331 5.82666 29.3331 7.61333Z" fill="#7C5CFC"/>
+                                <path d="M19.5198 9.81336L5.55984 23.7734C4.91984 24.4134 3.85317 24.2534 3.4265 23.4534C2.93317 22.5467 2.6665 21.4934 2.6665 20.3867V7.61336C2.6665 5.82669 3.69317 5.41336 4.9465 6.66669L8.3865 10.12C8.9065 10.6267 9.75984 10.6267 10.2798 10.12L15.0532 5.33336C15.5732 4.81336 16.4265 4.81336 16.9465 5.33336L19.5332 7.92003C20.0398 8.44003 20.0398 9.29336 19.5198 9.81336Z" fill="#7C5CFC"/>
+                            </svg>
+                            <h4 class="font-PlusJakarta font-semibold text-[32px] leading-42 text-primaryColor">Pro</h4>
+                        </div>
+                        <span class="inline-block bg-btnBg rounded-30 py-1 px-5 font-PlusJakarta font-medium text-base leading-7 text-primaryColor">Popular</span>
+                    </div>
+                    
+                    <p class="pt-3.5 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">Perfect plan for professionals!</p>
+                    <h4 id="price2" class="pt-6 font-PlusJakarta font-semibold text-40xl leading-50 text-primaryColor">$12 <span class="font-medium text-lg leading-8">/month</span></h4>
+                    <p class="pt-6 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">For professional only! Start arranging your expenses with our best templates.</p>
+                    <div class="mt-8">
+                        <ul>
+                            <li class="flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Everything in Free Plan
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Unlimited video chat
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Video Chat with  20 user
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="mt-8 block text-center text-lg  font-airbnb font-light text-primaryColor px-6 py-3.5 bg-btnBg rounded-30  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get Started</a>    
+                </div>
+
+                <div class="bg-secondaryColor p-8 rounded-12">
+                    <div class="flex items-center gap-3">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.88 14.2934H19.76V4.69336C19.76 2.45336 18.5467 2.00003 17.0667 3.68003L16 4.89336L6.97335 15.16C5.73335 16.56 6.25335 17.7067 8.12002 17.7067H12.24V27.3067C12.24 29.5467 13.4533 30 14.9333 28.32L16 27.1067L25.0267 16.84C26.2667 15.44 25.7467 14.2934 23.88 14.2934Z" fill="#7C5CFC"/>
+                        </svg>
+                        <h4 class="font-PlusJakarta font-semibold text-[32px] leading-42 text-primaryColor">Ultimate</h4>
+                    </div>
+                    <p class="pt-3.5 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">Best suits for great company!</p>
+                    <h4 id="price3" class="pt-6 font-PlusJakarta font-semibold text-40xl leading-50 text-primaryColor">$33 <span class="font-medium text-lg leading-8">/month</span></h4>
+                    <p class="pt-6 font-PlusJakarta font-medium text-base leading-7 text-opacity-70 text-primaryColor">If you a finance manager at big  company, this plan is a perfect match.</p>
+                    <div class="mt-8">
+                        <ul>
+                            <li class="flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Everything in Free Plan
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Video Chat with  unlimited user
+                            </li>
+                            <li class="mt-6 flex gap-3 items-center font-PlusJakarta font-medium text-lg leading-8 text-opacity-70 text-primaryColor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#7C5CFC"/>
+                                </svg>
+                                Advanced security
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="mt-8 block text-center text-lg  font-airbnb font-light text-primaryColor px-6 py-3.5 bg-btnBg rounded-30  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get Started</a>
+                     
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Area End Here -->
+
+    <!-- DownLoad Area Start Here -->
+    <section class="bg-no-repeat bg-cover bg-center w-full pt-16" style="background-image: url('assets/img/download-bg.png');">
+        <div class="container">
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="flex lg:flex-row flex-col justify-between items-center xl:gap-[170px] lg:gap-20 gap-8">
+                <div class="lg:w-568 w-full">
+                    <span class="block text-btnBg font-PlusJakarta font-semibold text-xl leading-8">DOWNLOAD NOW!</span>
+                    <h2 class="pt-3 font-PlusJakarta font-bold md:text-40xl text-26xl leading-38 md:leading-50 text-primaryColor">Start Track Your Business
+                        Expenses Today</h2>
+                    <p class=" font-airbnb font-light md:text-xl text-base leading-7 md:leading-8 text-primaryColor text-opacity-80 pt-6 tracking-[-.2px]">Are you ready to make your business more organized? Download Spend.In now!</p>
+                    <a href="#" class="mt-8 md:inline-block block text-center text-lg  font-airbnb font-light text-primaryColor px-6 py-3.5 bg-btnBg rounded-30  transition ease-in-out duration-500 hover:scale-105 hover:transition hover:ease-in-out hover:duration-500">Get a Free Demo</a>
+                    
+                </div>
+                <div
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+                data-aos-offset="20"
+                data-aos-once="true"
+                class="lg:w-[462px] w-full ">
+                    <img class="w-full" src="assets/img/download.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- DownLoad Area End Here -->
+
+    <!-- Footer Area Start Here -->
+    <section class="lg:mt-32 mt-16 mb-8">
+        <div class="container xl:px-0">
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="flex xl:flex-row flex-col justify-between xl:gap-y-0 gap-y-8">
+                <div class="lg:w-[191px] w-full">
+                    <a href="">
+                        <img src="assets/img/footer-logo.png" alt="">
+                    </a>
+                    <p class=" font-airbnb font-light text-lg leading-8 text-primaryColor text-opacity-70 pt-8 -tracking-[.2px]">Video chat, online meeting best platform ever try now!</p>
+                </div>
+                <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-16 gap-10 xl:w-[800px] w-full lg:mt-0 md:mt-16 mt-8">
+                    <div>
+                        <h5 class="font-PlusJakarta font-medium text-xl leading-8 text-primaryColor">Product</h5>
+                        <ul class="mt-5">
+                            <li><a href="#"  onclick="event.preventDefault()" class="font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Digital Invoice</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Insights</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Reimbursements</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Virtual Assistant</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Artificial Intelligence</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-PlusJakarta font-medium text-xl leading-8 text-primaryColor">Company</h5>
+                        <ul class="mt-5">
+                            <li><a href="#"  onclick="event.preventDefault()" class=" font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">About Us</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Newsletters</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Our Partners</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Career</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-NeueMontreal font-medium text-xl leading-8 text-primaryColor">Resources</h5>
+                        <ul class="mt-5">
+                            <li><a href="#"  onclick="event.preventDefault()" class=" font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Blog</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Pricing</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">FAQ</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Events</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Ebook & Guide</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-NeueMontreal font-medium text-xl leading-8 text-primaryColor">Follow Us</h5>
+                        <ul class="mt-5">
+                            <li><a href="#"  onclick="event.preventDefault()" class=" font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">LinkedIn</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Twitter</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Instagram</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">Facebook</a></li>
+                            <li><a href="#"  onclick="event.preventDefault()" class="pt-5 font-airbnb font-light text-base leading-7 text-primaryColor text-opacity-70 block hover:text-btnBg hover:transition-all hover:ease-in-out hover:duration-500">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr 
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="w-full border border-primaryColor border-opacity-10 mt-16 mb-8 "/>
+            <div
+            data-aos="fade-down"
+            data-aos-duration="1000"
+            data-aos-offset="20"
+            data-aos-once="true"
+            class="flex lg:flex-row flex-col justify-between items-center lg:gap-y-0 gap-y-8">
+                <div class="flex md:flex-row flex-col justify-between items-center gap-x-8 md:gap-y-0 gap-y-4">
+                    <p class="text-base leading-7 text-primaryColor text-opacity-70  font-airbnb font-light">Terms & Conditions</p>
+                    <div class="w-[1px] h-[14px] bg-[#596780] md:block hidden"></div>
+                    <p class="text-base leading-7 text-primaryColor text-opacity-70  font-airbnb font-light">Privacy Policy</p>
+                    <div class="w-[1px] h-[14px] bg-[#596780] md:block hidden"></div>
+                    <p class="text-base leading-7 text-primaryColor text-opacity-70  font-airbnb font-light">Terms & Conditions</p>
+                </div>
+                <p class=" font-airbnb font-light text-base leading-6 text-primaryColor text-opacity-70">&copy; 2024 Company All Rights Resaved </p>
+                
+            </div>
+        </div>
+    </section>
+    <!-- Footer Area End Here -->
+
+    <script src="assets/js/alpine.min.js" defer></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/slider.js"></script>
+    
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/aos_script.js"></script>
+</body>
+</html>
